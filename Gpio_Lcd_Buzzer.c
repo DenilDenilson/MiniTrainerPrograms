@@ -11,7 +11,7 @@ void INTERRUPT_Global_Config(void);
 void INTERRUPT_INTx_Config(void);
 
 /* V A R I A B L E S */
-uint8_t hours = 0, minutes = 0, seconds = 0;
+uint8_t hours = 0, minutes = 0, seconds = 0, col;
 char strReloj[20];
 
 int main( void ) {
@@ -26,15 +26,15 @@ int main( void ) {
     
     
     while ( 1 ) {
-        Lcd_Set_Cursor(2, 1);
-        for (uint8_t col = 1; col <=17; col++) {
-            Lcd_Set_Cursor(2, col);
-            Lcd_Write_String("*");
-            __delay_ms(250);
-            Lcd_Set_Cursor(2, col);
-            Lcd_Write_String(" ");
-        }
-        
+//        for (col = 1; col <=17; col++) {
+//            Lcd_Set_Cursor(2, col);
+//            Lcd_Write_String("*");
+//            __delay_ms(250);
+//            Lcd_Set_Cursor(2, col);
+//            Lcd_Write_String(" ");
+//            __delay_ms(50);
+//        }        
+//        /* G E N E R A    Q U E   S E     R O M P A   L A     P A N T A L L A */
     }
 }
 

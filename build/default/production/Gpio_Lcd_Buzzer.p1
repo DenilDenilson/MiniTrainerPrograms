@@ -15,10 +15,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37 ./lib_pic/lcd_2x16.h
 [; ;./lib_pic/lcd_2x16.h: 37: void Lcd_Write_String(unsigned char *a);
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
-[v F192 `(v ~T0 @X0 1 tf1`ul ]
-"12 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\builtins.h
-[v __delay `JF192 ~T0 @X0 0 e ]
-[p i __delay ]
 "361 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 361: extern volatile unsigned char ANSELD __attribute__((address(0xF5E)));
 [v _ANSELD `Vuc ~T0 @X0 0 e@3934 ]
@@ -859,7 +855,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "79
 [p x EBTRB  =  OFF       ]
 "14 Gpio_Lcd_Buzzer.c
-[; ;Gpio_Lcd_Buzzer.c: 14: uint8_t hours = 0, minutes = 0, seconds = 0;
+[; ;Gpio_Lcd_Buzzer.c: 14: uint8_t hours = 0, minutes = 0, seconds = 0, col;
 [v _hours `uc ~T0 @X0 1 e ]
 [i _hours
 -> -> 0 `i `uc
@@ -872,6 +868,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [i _seconds
 -> -> 0 `i `uc
 ]
+[v _col `uc ~T0 @X0 1 e ]
 "15
 [; ;Gpio_Lcd_Buzzer.c: 15: char strReloj[20];
 [v _strReloj `uc ~T0 @X0 -> 20 `i e ]
@@ -901,40 +898,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Gpio_Lcd_Buzzer.c: 28:     while ( 1 ) {
 [e :U 641 ]
 {
-"29
-[; ;Gpio_Lcd_Buzzer.c: 29:         Lcd_Set_Cursor(2, 1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"30
-[; ;Gpio_Lcd_Buzzer.c: 30:         for (uint8_t col = 1; col <=17; col++) {
-{
-[v _col `uc ~T0 @X0 1 a ]
-[e = _col -> -> 1 `i `uc ]
-[e $ <= -> _col `i -> 17 `i 643  ]
-[e $U 644  ]
-[e :U 643 ]
-{
-"31
-[; ;Gpio_Lcd_Buzzer.c: 31:             Lcd_Set_Cursor(2, col);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc _col ]
-"32
-[; ;Gpio_Lcd_Buzzer.c: 32:             Lcd_Write_String("*");
-[e ( _Lcd_Write_String (1 :s 2C ]
-"33
-[; ;Gpio_Lcd_Buzzer.c: 33:             _delay((unsigned long)((250)*(8000000UL/4000.0)));
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"34
-[; ;Gpio_Lcd_Buzzer.c: 34:             Lcd_Set_Cursor(2, col);
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc _col ]
-"35
-[; ;Gpio_Lcd_Buzzer.c: 35:             Lcd_Write_String(" ");
-[e ( _Lcd_Write_String (1 :s 3C ]
-"36
-[; ;Gpio_Lcd_Buzzer.c: 36:         }
-}
-[e ++ _col -> -> 1 `i `uc ]
-[e $ <= -> _col `i -> 17 `i 643  ]
-[e :U 644 ]
-}
 "38
 [; ;Gpio_Lcd_Buzzer.c: 38:     }
 }
@@ -974,7 +937,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _TRISBbits 1 2 -> -> 1 `i `uc ]
 "55
 [; ;Gpio_Lcd_Buzzer.c: 55: }
-[e :UE 646 ]
+[e :UE 643 ]
 }
 [v $root$_RutinaServicioInterrupt `(v ~T0 @X0 0 e ]
 "58
@@ -985,7 +948,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "60
 [; ;Gpio_Lcd_Buzzer.c: 60:     if ( INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1 ) {
-[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 648  ]
+[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 645  ]
 {
 "62
 [; ;Gpio_Lcd_Buzzer.c: 62:         TMR0 = 3036;
@@ -998,7 +961,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _seconds -> -> 1 `i `uc ]
 "67
 [; ;Gpio_Lcd_Buzzer.c: 67:         if ( seconds >= 60 ) {
-[e $ ! >= -> _seconds `i -> 60 `i 649  ]
+[e $ ! >= -> _seconds `i -> 60 `i 646  ]
 {
 "68
 [; ;Gpio_Lcd_Buzzer.c: 68:             seconds = 0;
@@ -1008,7 +971,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _minutes -> -> 1 `i `uc ]
 "70
 [; ;Gpio_Lcd_Buzzer.c: 70:             if ( minutes >= 60 ) {
-[e $ ! >= -> _minutes `i -> 60 `i 650  ]
+[e $ ! >= -> _minutes `i -> 60 `i 647  ]
 {
 "71
 [; ;Gpio_Lcd_Buzzer.c: 71:                 minutes = 0;
@@ -1018,7 +981,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ++ _hours -> -> 1 `i `uc ]
 "73
 [; ;Gpio_Lcd_Buzzer.c: 73:                 if ( hours >= 24 ) {
-[e $ ! >= -> _hours `i -> 24 `i 651  ]
+[e $ ! >= -> _hours `i -> 24 `i 648  ]
 {
 "74
 [; ;Gpio_Lcd_Buzzer.c: 74:                     hours = 0;
@@ -1026,31 +989,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 "75
 [; ;Gpio_Lcd_Buzzer.c: 75:                 }
 }
-[e :U 651 ]
+[e :U 648 ]
 "76
 [; ;Gpio_Lcd_Buzzer.c: 76:             }
 }
-[e :U 650 ]
+[e :U 647 ]
 "77
 [; ;Gpio_Lcd_Buzzer.c: 77:         }
 }
-[e :U 649 ]
+[e :U 646 ]
 "78
 [; ;Gpio_Lcd_Buzzer.c: 78:         Lcd_Set_Cursor(1, 1);
 [e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
 "79
 [; ;Gpio_Lcd_Buzzer.c: 79:         sprintf(strReloj, "Timer:  %02u:%02u:%02u", hours, minutes, seconds);
-[e ( _sprintf (1 , , , (. , &U _strReloj :s 4C -> _hours `i -> _minutes `i -> _seconds `i ]
+[e ( _sprintf (1 , , , (. , &U _strReloj :s 2C -> _hours `i -> _minutes `i -> _seconds `i ]
 "81
 [; ;Gpio_Lcd_Buzzer.c: 81:         Lcd_Write_String(strReloj);
 [e ( _Lcd_Write_String (1 -> &U _strReloj `*uc ]
 "85
 [; ;Gpio_Lcd_Buzzer.c: 85:     }
 }
-[e :U 648 ]
+[e :U 645 ]
 "86
 [; ;Gpio_Lcd_Buzzer.c: 86: }
-[e :UE 647 ]
+[e :UE 644 ]
 }
 "91
 [; ;Gpio_Lcd_Buzzer.c: 91: void Hardware_Init(void) {
@@ -1075,7 +1038,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _INTERRUPT_Global_Config ..  ]
 "97
 [; ;Gpio_Lcd_Buzzer.c: 97: }
-[e :UE 652 ]
+[e :UE 649 ]
 }
 "100
 [; ;Gpio_Lcd_Buzzer.c: 100: void INTERRUPT_Global_Config(void) {
@@ -1094,7 +1057,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
 "105
 [; ;Gpio_Lcd_Buzzer.c: 105: }
-[e :UE 653 ]
+[e :UE 650 ]
 }
 "108
 [; ;Gpio_Lcd_Buzzer.c: 108: void TMR0_Temporizador_Init(void) {
@@ -1128,7 +1091,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
 "123
 [; ;Gpio_Lcd_Buzzer.c: 123: }
-[e :UE 654 ]
+[e :UE 651 ]
 }
 "127
 [; ;Gpio_Lcd_Buzzer.c: 127: void INTERRUPT_INTx_Config(void) {
@@ -1147,10 +1110,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _INTCON2bits 1 6 -> -> 0 `i `uc ]
 "132
 [; ;Gpio_Lcd_Buzzer.c: 132: }
-[e :UE 655 ]
+[e :UE 652 ]
 }
 [p f _sprintf 8422404 ]
 [a 1C 84 105 109 101 114 58 32 32 37 48 50 117 58 37 48 50 117 58 37 48 50 117 0 ]
-[a 4C 84 105 109 101 114 58 32 32 37 48 50 117 58 37 48 50 117 58 37 48 50 117 0 ]
-[a 2C 42 0 ]
-[a 3C 32 0 ]
+[a 2C 84 105 109 101 114 58 32 32 37 48 50 117 58 37 48 50 117 58 37 48 50 117 0 ]

@@ -8414,7 +8414,7 @@ void INTERRUPT_Global_Config(void);
 void INTERRUPT_INTx_Config(void);
 
 
-uint8_t hours = 0, minutes = 0, seconds = 0;
+uint8_t hours = 0, minutes = 0, seconds = 0, col;
 char strReloj[20];
 
 int main( void ) {
@@ -8429,15 +8429,7 @@ int main( void ) {
 
 
     while ( 1 ) {
-        Lcd_Set_Cursor(2, 1);
-        for (uint8_t col = 1; col <=17; col++) {
-            Lcd_Set_Cursor(2, col);
-            Lcd_Write_String("*");
-            _delay((unsigned long)((250)*(8000000UL/4000.0)));
-            Lcd_Set_Cursor(2, col);
-            Lcd_Write_String(" ");
-        }
-
+# 38 "Gpio_Lcd_Buzzer.c"
     }
 }
 
