@@ -8412,10 +8412,14 @@ void Hardware_Init(void);
 void TMR0_Temporizador_Init(void);
 void INTERRUPT_Global_Config(void);
 void INTERRUPT_INTx_Config(void);
+void Print_Hour(void);
 
 
-uint8_t hours = 0, minutes = 0, seconds = 0, col;
+volatile int8_t hours = 0, minutes = 0, seconds = 0;
 char strReloj[20];
+volatile _Bool is_pause = 1;
+
+uint8_t col;
 
 int main( void ) {
 
@@ -8429,9 +8433,86 @@ int main( void ) {
 
 
     while ( 1 ) {
-# 38 "Gpio_Lcd_Buzzer.c"
+# 43 "Gpio_Lcd_Buzzer.c"
+        Print_Hour();
+
+
+        if ( seconds == 0 && minutes == 0 && is_pause == 0 ) {
+            LATEbits.LATE2 = 1;
+            _delay((unsigned long)((250)*(8000000UL/4000.0)));
+            LATEbits.LATE2 = 0;
+            _delay((unsigned long)((250)*(8000000UL/4000.0)));
+        }
     }
 }
+
+
+
+void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
+
+
+    if ( INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1 ) {
+
+        TMR0 = 3036;
+        INTCONbits.TMR0IF = 0;
+# 80 "Gpio_Lcd_Buzzer.c"
+        seconds--;
+        if ( seconds < 0 ) {
+            seconds = 59;
+            minutes--;
+            if ( minutes < 0 ) {
+                minutes = 0;
+                seconds = 0;
+            }
+        }
+    }
+
+
+    if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
+
+        minutes++;
+
+
+        INTCONbits.INT0IF = 0;
+    }
+
+
+    if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
+
+        seconds++;
+
+
+        INTCON3bits.INT1IF = 0;
+    }
+
+
+    if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
+
+        if ( is_pause ) {
+
+            if ( seconds == 0 && minutes == 0 ) {
+                minutes = 0;
+                seconds = 0;
+            }
+            else if ( seconds == 0 ) {
+                seconds = 59;
+                minutes--;
+            }
+            else {
+                seconds--;
+            }
+
+        }
+        is_pause = !is_pause;
+
+        T0CONbits.TMR0ON = ~T0CONbits.TMR0ON;
+
+
+        INTCON3bits.INT2IF = 0;
+    }
+}
+
+
 
 
 void PORT_Init(void) {
@@ -8447,40 +8528,11 @@ void PORT_Init(void) {
     TRISBbits.RB2 = 1;
 
 
+    ANSELEbits.ANSE2 = 0;
+    TRISEbits.RE2 = 0;
+
+
 }
-
-
-void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
-
-    if ( INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1 ) {
-
-        TMR0 = 3036;
-        INTCONbits.TMR0IF = 0;
-
-
-        seconds++;
-        if ( seconds >= 60 ) {
-            seconds = 0;
-            minutes++;
-            if ( minutes >= 60 ) {
-                minutes = 0;
-                hours++;
-                if ( hours >= 24 ) {
-                    hours = 0;
-                }
-            }
-        }
-        Lcd_Set_Cursor(1, 1);
-        sprintf(strReloj, "Timer:  %02u:%02u:%02u", hours, minutes, seconds);
-
-        Lcd_Write_String(strReloj);
-
-
-
-    }
-}
-
-
 
 
 void Hardware_Init(void) {
@@ -8489,6 +8541,7 @@ void Hardware_Init(void) {
     Lcd_Init();
     TMR0_Temporizador_Init();
     INTERRUPT_Global_Config();
+    INTERRUPT_INTx_Config();
 }
 
 
@@ -8514,14 +8567,35 @@ void TMR0_Temporizador_Init(void) {
     INTCONbits.TMR0IF = 0;
 
 
-    T0CONbits.TMR0ON = 1;
+    T0CONbits.TMR0ON = 0;
 }
 
 
 
 void INTERRUPT_INTx_Config(void) {
+
     INTCONbits.INT0IE = 1;
     INTCONbits.INT0IF = 0;
-
     INTCON2bits.INTEDG0 = 0;
+
+
+    INTCON3bits.INT1IE = 1;
+    INTCON3bits.INT1F = 0;
+    INTCON2bits.INTEDG1 = 0;
+
+
+    INTCON3bits.INT2IE = 1;
+    INTCON3bits.INT2IF = 0;
+    INTCON2bits.INTEDG2 = 0;
+}
+
+
+
+
+void Print_Hour(void) {
+    Lcd_Set_Cursor(1, 1);
+
+    sprintf(strReloj, "Timer:     %02u:%02u", minutes, seconds);
+
+    Lcd_Write_String(strReloj);
 }
