@@ -63,7 +63,7 @@ void ADC_SelectChannel(uint8_t channel)
     ADCON0bits.CHS = channel;
 }
 
-uint16_t ADC_GetConvesion(uint8_t channel) //Super funciones
+uint16_t ADC_GetConversion(uint8_t channel) //Super funciones
 {
     ADC_SelectChannel(channel); //Seleccion del canal analogico
     ADC_Enable(); //Habilitar el modulo ADC

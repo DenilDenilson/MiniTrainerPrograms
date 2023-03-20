@@ -811,14 +811,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 641 ]
 }
 "66
-[; ;lib_pic/adc_10bits.c: 66: uint16_t ADC_GetConvesion(uint8_t channel)
-[v _ADC_GetConvesion `(us ~T0 @X0 1 ef1`uc ]
+[; ;lib_pic/adc_10bits.c: 66: uint16_t ADC_GetConversion(uint8_t channel)
+[v _ADC_GetConversion `(us ~T0 @X0 1 ef1`uc ]
 "67
 [; ;lib_pic/adc_10bits.c: 67: {
 {
-[e :U _ADC_GetConvesion ]
+[e :U _ADC_GetConversion ]
 "66
-[; ;lib_pic/adc_10bits.c: 66: uint16_t ADC_GetConvesion(uint8_t channel)
+[; ;lib_pic/adc_10bits.c: 66: uint16_t ADC_GetConversion(uint8_t channel)
 [v _channel `uc ~T0 @X0 1 r1 ]
 "67
 [; ;lib_pic/adc_10bits.c: 67: {

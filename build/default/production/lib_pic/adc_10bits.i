@@ -8115,7 +8115,7 @@ void ADC_Disable(void);
 void ADC_StartConversion(void);
 _Bool ADC_StateConversion(void);
 void ADC_SelectChannel(uint8_t channel);
-uint16_t ADC_GetConvesion(uint8_t channel);
+uint16_t ADC_GetConversion(uint8_t channel);
 # 2 "lib_pic/adc_10bits.c" 2
 
 
@@ -8157,7 +8157,7 @@ void ADC_SelectChannel(uint8_t channel)
     ADCON0bits.CHS = channel;
 }
 
-uint16_t ADC_GetConvesion(uint8_t channel)
+uint16_t ADC_GetConversion(uint8_t channel)
 {
     ADC_SelectChannel(channel);
     ADC_Enable();

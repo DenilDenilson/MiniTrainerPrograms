@@ -32,7 +32,7 @@ void ADC_Disable(void);
 void ADC_StartConversion(void);
 bool ADC_StateConversion(void);
 void ADC_SelectChannel(uint8_t channel);
-uint16_t ADC_GetConvesion(uint8_t channel);
+uint16_t ADC_GetConversion(uint8_t channel);
 
 #endif	/* ADC_10BITS_H */
 

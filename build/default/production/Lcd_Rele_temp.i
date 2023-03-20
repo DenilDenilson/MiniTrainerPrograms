@@ -1,4 +1,4 @@
-# 1 "but_leds.c"
+# 1 "Lcd_Rele_temp.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "but_leds.c" 2
+# 1 "Lcd_Rele_temp.c" 2
 # 1 "./lib_pic/configDevice.h" 1
 
 
@@ -8388,120 +8388,88 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 
 void OSCILADOR_Init(void);
-# 1 "but_leds.c" 2
+# 1 "Lcd_Rele_temp.c" 2
+
+# 1 "./lib_pic/adc_10bits.h" 1
+# 29 "./lib_pic/adc_10bits.h"
+void ADC_Init(void);
+void ADC_Enable(void);
+void ADC_Disable(void);
+void ADC_StartConversion(void);
+_Bool ADC_StateConversion(void);
+void ADC_SelectChannel(uint8_t channel);
+uint16_t ADC_GetConversion(uint8_t channel);
+# 2 "Lcd_Rele_temp.c" 2
+
+# 1 "./lib_pic/lcd_2x16.h" 1
+# 31 "./lib_pic/lcd_2x16.h"
+void Lcd_Port(unsigned char a);
+void Lcd_Cmd(unsigned char a);
+void Lcd_Clear( void );
+void Lcd_Set_Cursor(unsigned char a, unsigned char b);
+void Lcd_Init( void );
+void Lcd_Write_Char(unsigned char a);
+void Lcd_Write_String(unsigned char *a);
+void Lcd_Shift_Right( void );
+void Lcd_Shift_Left( void );
+# 3 "Lcd_Rele_temp.c" 2
 
 
 
-void PORT_Init(void);
-void INTERRUPT_Global_Config(void);
-void INTERRUPT_INTx_Config(void);
 
 
-volatile _Bool is_bt0_pushed = 0, is_bt1_pushed = 0, is_bt2_pushed = 0;
 
-int main ( void ) {
 
+void PORT_Init (void);
+
+
+
+float temp;
+char strTemp[20];
+
+
+
+int main (void)
+{
     OSCILADOR_Init();
     PORT_Init();
-    INTERRUPT_Global_Config();
-    INTERRUPT_INTx_Config();
+    ADC_Init();
 
-    while ( 1 ) {
+    Lcd_Init();
+    Lcd_Clear();
 
-        if ( is_bt1_pushed ) {
-            for (uint8_t i = 0; i <= 8; i++) {
-            LATD = 0b10000000 >> i;
-            _delay((unsigned long)((100)*(8000000UL/4000.0)));
-            }
-        }
-        else if ( is_bt2_pushed ) {
-            for (uint8_t i = 0; i <= 8; i++) {
-                LATD = 1 << i;
-                _delay((unsigned long)((100)*(8000000UL/4000.0)));
-            }
+    while(1)
+    {
+        temp = (((float)ADC_GetConversion(0))*(5.0/1023.0));
+        temp = ((temp - 0.5f)/0.01f);
+
+        sprintf(strTemp, "T = %.2f C", temp);
+        Lcd_Set_Cursor(1, 1);
+        Lcd_Write_String(">Temp. Ambiente<");
+        Lcd_Set_Cursor(2, 3);
+        Lcd_Write_String(strTemp);
+
+        if ( temp >= 30.0 ) {
+            LATEbits.LATE0 = 1;
         }
         else {
-
-
-
-
-            LATD = 0x00;
+            LATEbits.LATE0 = 0;
         }
 
-
+        _delay((unsigned long)((250)*(8000000UL/4000.0)));
     }
 }
 
 
+void PORT_Init (void)
+{
 
-void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
+    ANSELAbits.ANSA0 = 1;
 
-
-
-    if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
-
-        is_bt0_pushed = 1;
-        is_bt1_pushed = 0;
-        is_bt2_pushed = 0;
-
-        INTCONbits.INT0IF = 0;
-    }
-
-
-    if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
-
-        is_bt0_pushed = 0;
-        is_bt1_pushed = 1;
-        is_bt2_pushed = 0;
-
-        INTCON3bits.INT1IF = 0;
-    }
-
-
-    if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
-
-        is_bt0_pushed = 0;
-        is_bt1_pushed = 0;
-        is_bt2_pushed = 1;
-
-        INTCON3bits.INT2IF = 0;
-    }
-}
-
-
-
-
-
-
-
-void PORT_Init(void) {
 
     ANSELD = 0x00;
-    TRISD = 0x00;
-}
 
 
-void INTERRUPT_Global_Config(void) {
-    RCONbits.IPEN = 0;
-
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-}
-
-
-void INTERRUPT_INTx_Config(void) {
-
-    INTCONbits.INT0IE = 1;
-    INTCONbits.INT0IF = 0;
-    INTCON2bits.INTEDG0 = 0;
-
-
-    INTCON3bits.INT1IE = 1;
-    INTCON3bits.INT1F = 0;
-    INTCON2bits.INTEDG1 = 0;
-
-
-    INTCON3bits.INT2IE = 1;
-    INTCON3bits.INT2IF = 0;
-    INTCON2bits.INTEDG2 = 0;
+    ANSELEbits.ANSE0 = 0;
+    TRISEbits.RE0 = 0;
 }
