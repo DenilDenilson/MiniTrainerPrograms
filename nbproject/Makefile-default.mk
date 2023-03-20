@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c Usart_Butt_Lcd_Buzzer.c
+SOURCEFILES_QUOTED_IF_SPACED=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c Rele_buzzer_uart.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1.d ${OBJECTDIR}/lib_pic/configDevice.p1.d ${OBJECTDIR}/lib_pic/i2c_Master.p1.d ${OBJECTDIR}/lib_pic/keypad_4x4.p1.d ${OBJECTDIR}/lib_pic/lcd_2x16.p1.d ${OBJECTDIR}/lib_pic/spi_Master.p1.d ${OBJECTDIR}/lib_pic/usart.p1.d ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/Rele_buzzer_uart.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1.d ${OBJECTDIR}/lib_pic/configDevice.p1.d ${OBJECTDIR}/lib_pic/i2c_Master.p1.d ${OBJECTDIR}/lib_pic/keypad_4x4.p1.d ${OBJECTDIR}/lib_pic/lcd_2x16.p1.d ${OBJECTDIR}/lib_pic/spi_Master.p1.d ${OBJECTDIR}/lib_pic/usart.p1.d ${OBJECTDIR}/Rele_buzzer_uart.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1
+OBJECTFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/Rele_buzzer_uart.p1
 
 # Source Files
-SOURCEFILES=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c Usart_Butt_Lcd_Buzzer.c
+SOURCEFILES=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c Rele_buzzer_uart.c
 
 
 
@@ -144,13 +144,13 @@ ${OBJECTDIR}/lib_pic/usart.p1: lib_pic/usart.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/lib_pic/usart.d ${OBJECTDIR}/lib_pic/usart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/lib_pic/usart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1: Usart_Butt_Lcd_Buzzer.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/Rele_buzzer_uart.p1: Rele_buzzer_uart.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d 
-	@${RM} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1 Usart_Butt_Lcd_Buzzer.c 
-	@-${MV} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.d ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/Rele_buzzer_uart.p1.d 
+	@${RM} ${OBJECTDIR}/Rele_buzzer_uart.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Rele_buzzer_uart.p1 Rele_buzzer_uart.c 
+	@-${MV} ${OBJECTDIR}/Rele_buzzer_uart.d ${OBJECTDIR}/Rele_buzzer_uart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Rele_buzzer_uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/lib_pic/adc_10bits.p1: lib_pic/adc_10bits.c  nbproject/Makefile-${CND_CONF}.mk 
@@ -209,13 +209,13 @@ ${OBJECTDIR}/lib_pic/usart.p1: lib_pic/usart.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/lib_pic/usart.d ${OBJECTDIR}/lib_pic/usart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/lib_pic/usart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1: Usart_Butt_Lcd_Buzzer.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/Rele_buzzer_uart.p1: Rele_buzzer_uart.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d 
-	@${RM} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1 Usart_Butt_Lcd_Buzzer.c 
-	@-${MV} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.d ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Usart_Butt_Lcd_Buzzer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/Rele_buzzer_uart.p1.d 
+	@${RM} ${OBJECTDIR}/Rele_buzzer_uart.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Rele_buzzer_uart.p1 Rele_buzzer_uart.c 
+	@-${MV} ${OBJECTDIR}/Rele_buzzer_uart.d ${OBJECTDIR}/Rele_buzzer_uart.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Rele_buzzer_uart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 
