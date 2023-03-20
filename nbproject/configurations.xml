@@ -31,6 +31,7 @@
       <itemPath>Gpio_Lcd_Buzzer.c</itemPath>
       <itemPath>but_leds.c</itemPath>
       <itemPath>Lcd_Rele_temp.c</itemPath>
+      <itemPath>Usart_Butt_Lcd_Buzzer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -166,6 +167,8 @@
         <property key="program-the-device-with-default-config-words" value="true"/>
         <property key="remove-unused-sections" value="true"/>
       </HI-TECH-LINK>
+      <item path="Lcd_Rele_temp.c" ex="true" overriding="false">
+      </item>
       <PICkit3PlatformTool>
         <property key="firmware.download.all" value="false"/>
       </PICkit3PlatformTool>

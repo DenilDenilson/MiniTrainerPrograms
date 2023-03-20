@@ -1,4 +1,4 @@
-# 1 "Lcd_Rele_temp.c"
+# 1 "Usart_Butt_Lcd_Buzzer.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Lcd_Rele_temp.c" 2
+# 1 "Usart_Butt_Lcd_Buzzer.c" 2
 # 1 "./lib_pic/configDevice.h" 1
 
 
@@ -8388,18 +8388,22 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 
 void OSCILADOR_Init(void);
-# 1 "Lcd_Rele_temp.c" 2
+# 1 "Usart_Butt_Lcd_Buzzer.c" 2
 
-# 1 "./lib_pic/adc_10bits.h" 1
-# 29 "./lib_pic/adc_10bits.h"
-void ADC_Init(void);
-void ADC_Enable(void);
-void ADC_Disable(void);
-void ADC_StartConversion(void);
-_Bool ADC_StateConversion(void);
-void ADC_SelectChannel(uint8_t channel);
-uint16_t ADC_GetConversion(uint8_t channel);
-# 2 "Lcd_Rele_temp.c" 2
+# 1 "./lib_pic/usart.h" 1
+# 10 "./lib_pic/usart.h"
+void USART_SerialBegin(uint32_t baudios);
+void USART_TxEnable(void);
+void USART_TxDisable(void);
+void USART_RxEnable(void);
+void USART_RxDisable(void);
+void USART_WriteByte(char data);
+void USART_WriteString(char *pString);
+char USART_ReadByte(void);
+void putch(char c);
+void USART_RxInterruptEnable(void);
+void USART_RxInterruptDisable(void);
+# 2 "Usart_Butt_Lcd_Buzzer.c" 2
 
 # 1 "./lib_pic/lcd_2x16.h" 1
 # 31 "./lib_pic/lcd_2x16.h"
@@ -8412,64 +8416,119 @@ void Lcd_Write_Char(unsigned char a);
 void Lcd_Write_String(unsigned char *a);
 void Lcd_Shift_Right( void );
 void Lcd_Shift_Left( void );
-# 3 "Lcd_Rele_temp.c" 2
+# 3 "Usart_Butt_Lcd_Buzzer.c" 2
 
 
+void PORT_Init(void);
+void INTERRUPT_Global_Config(void);
+void INTERRUPT_INTx_Config(void);
 
 
+char datoRx;
+volatile uint8_t counter = 0;
+char strCounter[20];
 
-
-
-void PORT_Init (void);
-
-
-
-float temp;
-char strTemp[20];
-
-
-
-int main (void)
-{
+int main (void) {
     OSCILADOR_Init();
     PORT_Init();
-    ADC_Init();
+    USART_SerialBegin(9600);
+    INTERRUPT_INTx_Config();
+    INTERRUPT_Global_Config();
 
     Lcd_Init();
     Lcd_Clear();
 
-    while(1)
-    {
-        temp = (((float)ADC_GetConversion(0))*(5.0/1023.0));
-        temp = ((temp - 0.5f)/0.01f);
-
-        sprintf(strTemp, "T = %.2f C", temp);
+    while(1) {
         Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String(">Temp. Ambiente<");
-        Lcd_Set_Cursor(2, 3);
-        Lcd_Write_String(strTemp);
+        sprintf(strCounter, "Counter:     %03u", counter);
+        Lcd_Write_String(strCounter);
+        sprintf(strCounter, "Counter: %03u\r\n", counter);
+        USART_WriteString(strCounter);
 
-        if ( temp >= 30.0 ) {
-            LATEbits.LATE0 = 1;
+
+
+        if (counter % 10 == 0 && counter != 0) {
+            LATEbits.LATE2 = 1;
         }
         else {
-            LATEbits.LATE0 = 0;
+            LATEbits.LATE2 = 0;
         }
-
         _delay((unsigned long)((250)*(8000000UL/4000.0)));
+
     }
 }
 
 
-void PORT_Init (void)
-{
-
-    ANSELAbits.ANSA0 = 1;
+void __attribute__((picinterrupt(("")))) RutinaServicioInterrupcion_ISR(void) {
 
 
-    ANSELD = 0x00;
 
+    if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
+
+        counter = 0;
+
+        INTCONbits.INT0IF = 0;
+    }
+
+
+    if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
+
+        counter--;
+
+        INTCON3bits.INT1IF = 0;
+    }
+
+
+    if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
+
+        counter++;
+
+        INTCON3bits.INT2IF = 0;
+    }
+}
+
+void PORT_Init(void) {
 
     ANSELEbits.ANSE0 = 0;
     TRISEbits.RE0 = 0;
+
+
+    ANSELD = 0X00;
+
+
+    ANSELBbits.ANSB0 = 0;
+    TRISBbits.RB0 = 1;
+
+
+    ANSELEbits.ANSE2 = 0;
+    TRISEbits.RE2 = 0;
+
+}
+
+
+
+void INTERRUPT_Global_Config(void) {
+
+    RCONbits.IPEN = 0;
+
+
+    INTCONbits.GIE = 1;
+}
+
+
+void INTERRUPT_INTx_Config(void){
+
+    INTCONbits.INT0IE = 1;
+    INTCONbits.INT0IF = 0;
+    INTCON2bits.INTEDG0 = 0;
+
+
+    INTCON3bits.INT1IE = 1;
+    INTCON3bits.INT1F = 0;
+    INTCON2bits.INTEDG1 = 0;
+
+
+    INTCON3bits.INT2IE = 1;
+    INTCON3bits.INT2IF = 0;
+    INTCON2bits.INTEDG2 = 0;
 }
