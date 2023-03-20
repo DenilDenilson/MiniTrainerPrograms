@@ -1,38 +1,19 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"8 Gpio_Lcd_Buzzer.c
-[; ;Gpio_Lcd_Buzzer.c: 8: void Hardware_Init(void);
-[v _Hardware_Init `(v ~T0 @X0 0 ef ]
-"33 ./lib_pic/lcd_2x16.h
-[; ;./lib_pic/lcd_2x16.h: 33: void Lcd_Clear( void );
-[v _Lcd_Clear `(v ~T0 @X0 0 ef ]
-"34
-[; ;./lib_pic/lcd_2x16.h: 34: void Lcd_Set_Cursor(unsigned char a, unsigned char b);
-[v _Lcd_Set_Cursor `(v ~T0 @X0 0 ef2`uc`uc ]
-"109 C:\Program Files\Microchip\xc8\v2.40\pic\include\c99\stdio.h
-[; ;C:\Program Files\Microchip\xc8\v2.40\pic\include\c99\stdio.h: 109: int sprintf(char *restrict, const char *restrict, ...);
-[v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"37 ./lib_pic/lcd_2x16.h
-[; ;./lib_pic/lcd_2x16.h: 37: void Lcd_Write_String(unsigned char *a);
-[v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
-"12 Gpio_Lcd_Buzzer.c
-[; ;Gpio_Lcd_Buzzer.c: 12: void Print_Hour(void);
-[v _Print_Hour `(v ~T0 @X0 0 ef ]
-"4223 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4223:     struct {
-[s S176 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S176 . LATE0 LATE1 LATE2 ]
-"4228
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4228:     struct {
-[s S177 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S177 . LE0 LE1 LE2 ]
-"4222
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4222: typedef union {
-[u S175 `S176 1 `S177 1 ]
-[n S175 . . . ]
-"4234
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4234: extern volatile LATEbits_t LATEbits __attribute__((address(0xF8D)));
-[v _LATEbits `VS175 ~T0 @X0 0 e@3981 ]
+"86 ./lib_pic/configDevice.h
+[v _OSCILADOR_Init `(v ~T0 @X0 0 ef ]
+"4 but_leds.c
+[; ;but_leds.c: 4: void PORT_Init(void);
+[v _PORT_Init `(v ~T0 @X0 0 ef ]
+"5
+[; ;but_leds.c: 5: void INTERRUPT_Global_Config(void);
+[v _INTERRUPT_Global_Config `(v ~T0 @X0 0 ef ]
+"6
+[; ;but_leds.c: 6: void INTERRUPT_INTx_Config(void);
+[v _INTERRUPT_INTx_Config `(v ~T0 @X0 0 ef ]
+"4105 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h
+[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4105: extern volatile unsigned char LATD __attribute__((address(0xF8C)));
+[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 [v F192 `(v ~T0 @X0 1 tf1`ul ]
 "12 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\builtins.h
 [v __delay `JF192 ~T0 @X0 0 e ]
@@ -58,9 +39,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13257
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 13257: extern volatile INTCONbits_t INTCONbits __attribute__((address(0xFF2)));
 [v _INTCONbits `VS611 ~T0 @X0 0 e@4082 ]
-"12509
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12509: extern volatile unsigned short TMR0 __attribute__((address(0xFD6)));
-[v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
 "13062
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 13062:     struct {
 [s S605 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -76,91 +54,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13083
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 13083: extern volatile INTCON3bits_t INTCON3bits __attribute__((address(0xFF0)));
 [v _INTCON3bits `VS604 ~T0 @X0 0 e@4080 ]
-"12445
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12445:     struct {
-[s S557 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S557 . T0PS PSA T0SE T0CS T08BIT TMR0ON ]
-"12453
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12453:     struct {
-[s S558 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S558 . T0PS0 T0PS1 T0PS2 ]
-"12444
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12444: typedef union {
-[u S556 `S557 1 `S558 1 ]
-[n S556 . . . ]
-"12459
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12459: extern volatile T0CONbits_t T0CONbits __attribute__((address(0xFD5)));
-[v _T0CONbits `VS556 ~T0 @X0 0 e@4053 ]
 "361
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 361: extern volatile unsigned char ANSELD __attribute__((address(0xF5E)));
 [v _ANSELD `Vuc ~T0 @X0 0 e@3934 ]
-"283
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 283:     struct {
-[s S18 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S18 . ANSB0 ANSB1 ANSB2 ANSB3 ANSB4 ANSB5 ]
-"282
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 282: typedef union {
-[u S17 `S18 1 ]
-[n S17 . . ]
-"292
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 292: extern volatile ANSELBbits_t ANSELBbits __attribute__((address(0xF5C)));
-[v _ANSELBbits `VS17 ~T0 @X0 0 e@3932 ]
-"4859
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4859:     struct {
-[s S201 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S201 . TRISB0 TRISB1 TRISB2 TRISB3 TRISB4 TRISB5 TRISB6 TRISB7 ]
-"4869
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4869:     struct {
-[s S202 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S202 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-"4858
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4858: typedef union {
-[u S200 `S201 1 `S202 1 ]
-[n S200 . . . ]
-"4880
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 4880: extern volatile TRISBbits_t TRISBbits __attribute__((address(0xF93)));
-[v _TRISBbits `VS200 ~T0 @X0 0 e@3987 ]
-"429
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 429:     struct {
-[s S24 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S24 . ANSE0 ANSE1 ANSE2 ]
-"428
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 428: typedef union {
-[u S23 `S24 1 ]
-[n S23 . . ]
-"435
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 435: extern volatile ANSELEbits_t ANSELEbits __attribute__((address(0xF5F)));
-[v _ANSELEbits `VS23 ~T0 @X0 0 e@3935 ]
-"5481
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 5481:     struct {
-[s S219 :1 `uc 1 :1 `uc 1 :1 `uc 1 :4 `uc 1 :1 `uc 1 ]
-[n S219 . TRISE0 TRISE1 TRISE2 . WPUE3 ]
-"5488
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 5488:     struct {
-[s S220 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S220 . RE0 RE1 RE2 ]
-"5480
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 5480: typedef union {
-[u S218 `S219 1 `S220 1 ]
-[n S218 . . . ]
-"5494
-[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 5494: extern volatile TRISEbits_t TRISEbits __attribute__((address(0xF96)));
-[v _TRISEbits `VS218 ~T0 @X0 0 e@3990 ]
-"86 ./lib_pic/configDevice.h
-[v _OSCILADOR_Init `(v ~T0 @X0 0 ef ]
-"35 ./lib_pic/lcd_2x16.h
-[; ;./lib_pic/lcd_2x16.h: 35: void Lcd_Init( void );
-[v _Lcd_Init `(v ~T0 @X0 0 ef ]
-"9 Gpio_Lcd_Buzzer.c
-[; ;Gpio_Lcd_Buzzer.c: 9: void TMR0_Temporizador_Init(void);
-[v _TMR0_Temporizador_Init `(v ~T0 @X0 0 ef ]
-"10
-[; ;Gpio_Lcd_Buzzer.c: 10: void INTERRUPT_Global_Config(void);
-[v _INTERRUPT_Global_Config `(v ~T0 @X0 0 ef ]
-"11
-[; ;Gpio_Lcd_Buzzer.c: 11: void INTERRUPT_INTx_Config(void);
-[v _INTERRUPT_INTx_Config `(v ~T0 @X0 0 ef ]
-"12139 C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h
+"5248
+[; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 5248: extern volatile unsigned char TRISD __attribute__((address(0xF95)));
+[v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"12139
 [; ;C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\pic\include\proc\pic18f45k50.h: 12139:     struct {
 [s S541 :1 `uc 1 ]
 [n S541 . NOT_BOR ]
@@ -920,415 +820,266 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "79
 [p x EBTRB  =  OFF       ]
-"15 Gpio_Lcd_Buzzer.c
-[; ;Gpio_Lcd_Buzzer.c: 15: volatile int8_t hours = 0, minutes = 0, seconds = 0;
-[v _hours `Vc ~T0 @X0 1 e ]
-[i _hours
--> -> 0 `i `c
+"9 but_leds.c
+[; ;but_leds.c: 9: volatile _Bool is_bt0_pushed = 0, is_bt1_pushed = 0, is_bt2_pushed = 0;
+[v _is_bt0_pushed `Va ~T0 @X0 1 e ]
+[i _is_bt0_pushed
+-> -> 0 `i `a
 ]
-[v _minutes `Vc ~T0 @X0 1 e ]
-[i _minutes
--> -> 0 `i `c
+[v _is_bt1_pushed `Va ~T0 @X0 1 e ]
+[i _is_bt1_pushed
+-> -> 0 `i `a
 ]
-[v _seconds `Vc ~T0 @X0 1 e ]
-[i _seconds
--> -> 0 `i `c
+[v _is_bt2_pushed `Va ~T0 @X0 1 e ]
+[i _is_bt2_pushed
+-> -> 0 `i `a
 ]
-"16
-[; ;Gpio_Lcd_Buzzer.c: 16: char strReloj[20];
-[v _strReloj `uc ~T0 @X0 -> 20 `i e ]
-"17
-[; ;Gpio_Lcd_Buzzer.c: 17: volatile _Bool is_pause = 1;
-[v _is_pause `Va ~T0 @X0 1 e ]
-[i _is_pause
--> -> 1 `i `a
-]
-"19
-[; ;Gpio_Lcd_Buzzer.c: 19: uint8_t col;
-[v _col `uc ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"21
-[; ;Gpio_Lcd_Buzzer.c: 21: int main( void ) {
+"11
+[; ;but_leds.c: 11: int main ( void ) {
 [v _main `(i ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"23
-[; ;Gpio_Lcd_Buzzer.c: 23:     Hardware_Init();
-[e ( _Hardware_Init ..  ]
-"25
-[; ;Gpio_Lcd_Buzzer.c: 25:     Lcd_Clear();
-[e ( _Lcd_Clear ..  ]
-"26
-[; ;Gpio_Lcd_Buzzer.c: 26:     Lcd_Set_Cursor(1, 1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"27
-[; ;Gpio_Lcd_Buzzer.c: 27:     sprintf(strReloj, "Timer:  %02u:%02u:%02u", hours, minutes, seconds);
-[e ( _sprintf (1 , , , (. , &U _strReloj :s 1C -> _hours `i -> _minutes `i -> _seconds `i ]
-"29
-[; ;Gpio_Lcd_Buzzer.c: 29:     Lcd_Write_String(strReloj);
-[e ( _Lcd_Write_String (1 -> &U _strReloj `*uc ]
-"32
-[; ;Gpio_Lcd_Buzzer.c: 32:     while ( 1 ) {
+"13
+[; ;but_leds.c: 13:     OSCILADOR_Init();
+[e ( _OSCILADOR_Init ..  ]
+"14
+[; ;but_leds.c: 14:     PORT_Init();
+[e ( _PORT_Init ..  ]
+"15
+[; ;but_leds.c: 15:     INTERRUPT_Global_Config();
+[e ( _INTERRUPT_Global_Config ..  ]
+"16
+[; ;but_leds.c: 16:     INTERRUPT_INTx_Config();
+[e ( _INTERRUPT_INTx_Config ..  ]
+"18
+[; ;but_leds.c: 18:     while ( 1 ) {
 [e :U 641 ]
 {
-"43
-[; ;Gpio_Lcd_Buzzer.c: 43:         Print_Hour();
-[e ( _Print_Hour ..  ]
-"46
-[; ;Gpio_Lcd_Buzzer.c: 46:         if ( seconds == 0 && minutes == 0 && is_pause == 0 ) {
-[e $ ! && && == -> _seconds `i -> 0 `i == -> _minutes `i -> 0 `i == -> _is_pause `i -> 0 `i 643  ]
+"20
+[; ;but_leds.c: 20:         if ( is_bt1_pushed ) {
+[e $ ! != -> _is_bt1_pushed `i -> 0 `i 643  ]
 {
-"47
-[; ;Gpio_Lcd_Buzzer.c: 47:             LATEbits.LATE2 = 1;
-[e = . . _LATEbits 0 2 -> -> 1 `i `uc ]
-"48
-[; ;Gpio_Lcd_Buzzer.c: 48:             _delay((unsigned long)((250)*(8000000UL/4000.0)));
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"49
-[; ;Gpio_Lcd_Buzzer.c: 49:             LATEbits.LATE2 = 0;
-[e = . . _LATEbits 0 2 -> -> 0 `i `uc ]
-"50
-[; ;Gpio_Lcd_Buzzer.c: 50:             _delay((unsigned long)((250)*(8000000UL/4000.0)));
-[e ( __delay (1 -> * -> -> 250 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
-"51
-[; ;Gpio_Lcd_Buzzer.c: 51:         }
+"21
+[; ;but_leds.c: 21:             for (uint8_t i = 0; i <= 8; i++) {
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ <= -> _i `i -> 8 `i 644  ]
+[e $U 645  ]
+[e :U 644 ]
+{
+"22
+[; ;but_leds.c: 22:             LATD = 0b10000000 >> i;
+[e = _LATD -> >> -> 128 `i -> _i `i `uc ]
+"23
+[; ;but_leds.c: 23:             _delay((unsigned long)((100)*(8000000UL/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
+"24
+[; ;but_leds.c: 24:             }
 }
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 8 `i 644  ]
+[e :U 645 ]
+}
+"25
+[; ;but_leds.c: 25:         }
+}
+[e $U 647  ]
+"26
+[; ;but_leds.c: 26:         else if ( is_bt2_pushed ) {
 [e :U 643 ]
-"52
-[; ;Gpio_Lcd_Buzzer.c: 52:     }
+[e $ ! != -> _is_bt2_pushed `i -> 0 `i 648  ]
+{
+"27
+[; ;but_leds.c: 27:             for (uint8_t i = 0; i <= 8; i++) {
+{
+[v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
+[e $ <= -> _i `i -> 8 `i 649  ]
+[e $U 650  ]
+[e :U 649 ]
+{
+"28
+[; ;but_leds.c: 28:                 LATD = 1 << i;
+[e = _LATD -> << -> 1 `i -> _i `i `uc ]
+"29
+[; ;but_leds.c: 29:                 _delay((unsigned long)((100)*(8000000UL/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 8000000 `ul `d .4000.0 `ul ]
+"30
+[; ;but_leds.c: 30:             }
+}
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 8 `i 649  ]
+[e :U 650 ]
+}
+"31
+[; ;but_leds.c: 31:         }
+}
+[e $U 652  ]
+"32
+[; ;but_leds.c: 32:         else {
+[e :U 648 ]
+{
+"37
+[; ;but_leds.c: 37:             LATD = 0x00;
+[e = _LATD -> -> 0 `i `uc ]
+"38
+[; ;but_leds.c: 38:         }
+}
+[e :U 652 ]
+[e :U 647 ]
+"41
+[; ;but_leds.c: 41:     }
 }
 [e :U 640 ]
 [e $U 641  ]
 [e :U 642 ]
-"53
-[; ;Gpio_Lcd_Buzzer.c: 53: }
+"42
+[; ;but_leds.c: 42: }
 [e :UE 639 ]
 }
 [v $root$_RutinaServicioInterrupt `(v ~T0 @X0 0 e ]
-"57
-[; ;Gpio_Lcd_Buzzer.c: 57: void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
+"46
+[; ;but_leds.c: 46: void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
 [v _RutinaServicioInterrupt `(v ~T1 @X0 1 ef ]
 {
 [e :U _RutinaServicioInterrupt ]
 [f ]
+"50
+[; ;but_leds.c: 50:     if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
+[e $ ! && == -> . . _INTCONbits 0 4 `i -> 1 `i == -> . . _INTCONbits 0 1 `i -> 1 `i 654  ]
+{
+"52
+[; ;but_leds.c: 52:         is_bt0_pushed = 1;
+[e = _is_bt0_pushed -> -> 1 `i `a ]
+"53
+[; ;but_leds.c: 53:         is_bt1_pushed = 0;
+[e = _is_bt1_pushed -> -> 0 `i `a ]
+"54
+[; ;but_leds.c: 54:         is_bt2_pushed = 0;
+[e = _is_bt2_pushed -> -> 0 `i `a ]
+"56
+[; ;but_leds.c: 56:         INTCONbits.INT0IF = 0;
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+"57
+[; ;but_leds.c: 57:     }
+}
+[e :U 654 ]
 "60
-[; ;Gpio_Lcd_Buzzer.c: 60:     if ( INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1 ) {
-[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 645  ]
+[; ;but_leds.c: 60:     if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
+[e $ ! && == -> . . _INTCON3bits 0 3 `i -> 1 `i == -> . . _INTCON3bits 0 0 `i -> 1 `i 655  ]
 {
 "62
-[; ;Gpio_Lcd_Buzzer.c: 62:         TMR0 = 3036;
-[e = _TMR0 -> -> 3036 `i `us ]
+[; ;but_leds.c: 62:         is_bt0_pushed = 0;
+[e = _is_bt0_pushed -> -> 0 `i `a ]
 "63
-[; ;Gpio_Lcd_Buzzer.c: 63:         INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"80
-[; ;Gpio_Lcd_Buzzer.c: 80:         seconds--;
-[e -- _seconds -> -> 1 `i `Vc ]
-"81
-[; ;Gpio_Lcd_Buzzer.c: 81:         if ( seconds < 0 ) {
-[e $ ! < -> _seconds `i -> 0 `i 646  ]
-{
-"82
-[; ;Gpio_Lcd_Buzzer.c: 82:             seconds = 59;
-[e = _seconds -> -> 59 `i `c ]
-"83
-[; ;Gpio_Lcd_Buzzer.c: 83:             minutes--;
-[e -- _minutes -> -> 1 `i `Vc ]
-"84
-[; ;Gpio_Lcd_Buzzer.c: 84:             if ( minutes < 0 ) {
-[e $ ! < -> _minutes `i -> 0 `i 647  ]
-{
-"85
-[; ;Gpio_Lcd_Buzzer.c: 85:                 minutes = 0;
-[e = _minutes -> -> 0 `i `c ]
-"86
-[; ;Gpio_Lcd_Buzzer.c: 86:                 seconds = 0;
-[e = _seconds -> -> 0 `i `c ]
-"87
-[; ;Gpio_Lcd_Buzzer.c: 87:             }
-}
-[e :U 647 ]
-"88
-[; ;Gpio_Lcd_Buzzer.c: 88:         }
-}
-[e :U 646 ]
-"89
-[; ;Gpio_Lcd_Buzzer.c: 89:     }
-}
-[e :U 645 ]
-"92
-[; ;Gpio_Lcd_Buzzer.c: 92:     if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
-[e $ ! && == -> . . _INTCONbits 0 4 `i -> 1 `i == -> . . _INTCONbits 0 1 `i -> 1 `i 648  ]
-{
-"94
-[; ;Gpio_Lcd_Buzzer.c: 94:         minutes++;
-[e ++ _minutes -> -> 1 `i `Vc ]
-"97
-[; ;Gpio_Lcd_Buzzer.c: 97:         INTCONbits.INT0IF = 0;
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"98
-[; ;Gpio_Lcd_Buzzer.c: 98:     }
-}
-[e :U 648 ]
-"101
-[; ;Gpio_Lcd_Buzzer.c: 101:     if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
-[e $ ! && == -> . . _INTCON3bits 0 3 `i -> 1 `i == -> . . _INTCON3bits 0 0 `i -> 1 `i 649  ]
-{
-"103
-[; ;Gpio_Lcd_Buzzer.c: 103:         seconds++;
-[e ++ _seconds -> -> 1 `i `Vc ]
-"106
-[; ;Gpio_Lcd_Buzzer.c: 106:         INTCON3bits.INT1IF = 0;
+[; ;but_leds.c: 63:         is_bt1_pushed = 1;
+[e = _is_bt1_pushed -> -> 1 `i `a ]
+"64
+[; ;but_leds.c: 64:         is_bt2_pushed = 0;
+[e = _is_bt2_pushed -> -> 0 `i `a ]
+"66
+[; ;but_leds.c: 66:         INTCON3bits.INT1IF = 0;
 [e = . . _INTCON3bits 0 0 -> -> 0 `i `uc ]
-"107
-[; ;Gpio_Lcd_Buzzer.c: 107:     }
-}
-[e :U 649 ]
-"110
-[; ;Gpio_Lcd_Buzzer.c: 110:     if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
-[e $ ! && == -> . . _INTCON3bits 0 4 `i -> 1 `i == -> . . _INTCON3bits 0 1 `i -> 1 `i 650  ]
-{
-"112
-[; ;Gpio_Lcd_Buzzer.c: 112:         if ( is_pause ) {
-[e $ ! != -> _is_pause `i -> 0 `i 651  ]
-{
-"114
-[; ;Gpio_Lcd_Buzzer.c: 114:             if ( seconds == 0 && minutes == 0 ) {
-[e $ ! && == -> _seconds `i -> 0 `i == -> _minutes `i -> 0 `i 652  ]
-{
-"115
-[; ;Gpio_Lcd_Buzzer.c: 115:                 minutes = 0;
-[e = _minutes -> -> 0 `i `c ]
-"116
-[; ;Gpio_Lcd_Buzzer.c: 116:                 seconds = 0;
-[e = _seconds -> -> 0 `i `c ]
-"117
-[; ;Gpio_Lcd_Buzzer.c: 117:             }
-}
-[e $U 653  ]
-"118
-[; ;Gpio_Lcd_Buzzer.c: 118:             else if ( seconds == 0 ) {
-[e :U 652 ]
-[e $ ! == -> _seconds `i -> 0 `i 654  ]
-{
-"119
-[; ;Gpio_Lcd_Buzzer.c: 119:                 seconds = 59;
-[e = _seconds -> -> 59 `i `c ]
-"120
-[; ;Gpio_Lcd_Buzzer.c: 120:                 minutes--;
-[e -- _minutes -> -> 1 `i `Vc ]
-"121
-[; ;Gpio_Lcd_Buzzer.c: 121:             }
-}
-[e $U 655  ]
-"122
-[; ;Gpio_Lcd_Buzzer.c: 122:             else {
-[e :U 654 ]
-{
-"123
-[; ;Gpio_Lcd_Buzzer.c: 123:                 seconds--;
-[e -- _seconds -> -> 1 `i `Vc ]
-"124
-[; ;Gpio_Lcd_Buzzer.c: 124:             }
+"67
+[; ;but_leds.c: 67:     }
 }
 [e :U 655 ]
-[e :U 653 ]
-"126
-[; ;Gpio_Lcd_Buzzer.c: 126:         }
-}
-[e :U 651 ]
-"127
-[; ;Gpio_Lcd_Buzzer.c: 127:         is_pause = !is_pause;
-[e = _is_pause -> -> ! != -> _is_pause `i -> 0 `i `i `a ]
-"129
-[; ;Gpio_Lcd_Buzzer.c: 129:         T0CONbits.TMR0ON = ~T0CONbits.TMR0ON;
-[e = . . _T0CONbits 0 5 -> ~ -> . . _T0CONbits 0 5 `i `uc ]
-"132
-[; ;Gpio_Lcd_Buzzer.c: 132:         INTCON3bits.INT2IF = 0;
+"70
+[; ;but_leds.c: 70:     if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
+[e $ ! && == -> . . _INTCON3bits 0 4 `i -> 1 `i == -> . . _INTCON3bits 0 1 `i -> 1 `i 656  ]
+{
+"72
+[; ;but_leds.c: 72:         is_bt0_pushed = 0;
+[e = _is_bt0_pushed -> -> 0 `i `a ]
+"73
+[; ;but_leds.c: 73:         is_bt1_pushed = 0;
+[e = _is_bt1_pushed -> -> 0 `i `a ]
+"74
+[; ;but_leds.c: 74:         is_bt2_pushed = 1;
+[e = _is_bt2_pushed -> -> 1 `i `a ]
+"76
+[; ;but_leds.c: 76:         INTCON3bits.INT2IF = 0;
 [e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-"133
-[; ;Gpio_Lcd_Buzzer.c: 133:     }
+"77
+[; ;but_leds.c: 77:     }
 }
-[e :U 650 ]
-"134
-[; ;Gpio_Lcd_Buzzer.c: 134: }
-[e :UE 644 ]
+[e :U 656 ]
+"78
+[; ;but_leds.c: 78: }
+[e :UE 653 ]
 }
-"139
-[; ;Gpio_Lcd_Buzzer.c: 139: void PORT_Init(void) {
+"86
+[; ;but_leds.c: 86: void PORT_Init(void) {
 [v _PORT_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _PORT_Init ]
 [f ]
-"141
-[; ;Gpio_Lcd_Buzzer.c: 141:     ANSELD = 0x00;
+"88
+[; ;but_leds.c: 88:     ANSELD = 0x00;
 [e = _ANSELD -> -> 0 `i `uc ]
-"144
-[; ;Gpio_Lcd_Buzzer.c: 144:     ANSELBbits.ANSB0 = 0;
-[e = . . _ANSELBbits 0 0 -> -> 0 `i `uc ]
-"145
-[; ;Gpio_Lcd_Buzzer.c: 145:     TRISBbits.RB0 = 1;
-[e = . . _TRISBbits 1 0 -> -> 1 `i `uc ]
-"146
-[; ;Gpio_Lcd_Buzzer.c: 146:     ANSELBbits.ANSB1 = 0;
-[e = . . _ANSELBbits 0 1 -> -> 0 `i `uc ]
-"147
-[; ;Gpio_Lcd_Buzzer.c: 147:     TRISBbits.RB1 = 1;
-[e = . . _TRISBbits 1 1 -> -> 1 `i `uc ]
-"148
-[; ;Gpio_Lcd_Buzzer.c: 148:     ANSELBbits.ANSB2 = 0;
-[e = . . _ANSELBbits 0 2 -> -> 0 `i `uc ]
-"149
-[; ;Gpio_Lcd_Buzzer.c: 149:     TRISBbits.RB2 = 1;
-[e = . . _TRISBbits 1 2 -> -> 1 `i `uc ]
-"152
-[; ;Gpio_Lcd_Buzzer.c: 152:     ANSELEbits.ANSE2 = 0;
-[e = . . _ANSELEbits 0 2 -> -> 0 `i `uc ]
-"153
-[; ;Gpio_Lcd_Buzzer.c: 153:     TRISEbits.RE2 = 0;
-[e = . . _TRISEbits 1 2 -> -> 0 `i `uc ]
-"156
-[; ;Gpio_Lcd_Buzzer.c: 156: }
-[e :UE 656 ]
-}
-"159
-[; ;Gpio_Lcd_Buzzer.c: 159: void Hardware_Init(void) {
-[v _Hardware_Init `(v ~T0 @X0 1 ef ]
-{
-[e :U _Hardware_Init ]
-[f ]
-"160
-[; ;Gpio_Lcd_Buzzer.c: 160:     OSCILADOR_Init();
-[e ( _OSCILADOR_Init ..  ]
-"161
-[; ;Gpio_Lcd_Buzzer.c: 161:     PORT_Init();
-[e ( _PORT_Init ..  ]
-"162
-[; ;Gpio_Lcd_Buzzer.c: 162:     Lcd_Init();
-[e ( _Lcd_Init ..  ]
-"163
-[; ;Gpio_Lcd_Buzzer.c: 163:     TMR0_Temporizador_Init();
-[e ( _TMR0_Temporizador_Init ..  ]
-"164
-[; ;Gpio_Lcd_Buzzer.c: 164:     INTERRUPT_Global_Config();
-[e ( _INTERRUPT_Global_Config ..  ]
-"165
-[; ;Gpio_Lcd_Buzzer.c: 165:     INTERRUPT_INTx_Config();
-[e ( _INTERRUPT_INTx_Config ..  ]
-"166
-[; ;Gpio_Lcd_Buzzer.c: 166: }
+"89
+[; ;but_leds.c: 89:     TRISD = 0x00;
+[e = _TRISD -> -> 0 `i `uc ]
+"90
+[; ;but_leds.c: 90: }
 [e :UE 657 ]
 }
-"169
-[; ;Gpio_Lcd_Buzzer.c: 169: void INTERRUPT_Global_Config(void) {
+"93
+[; ;but_leds.c: 93: void INTERRUPT_Global_Config(void) {
 [v _INTERRUPT_Global_Config `(v ~T0 @X0 1 ef ]
 {
 [e :U _INTERRUPT_Global_Config ]
 [f ]
-"170
-[; ;Gpio_Lcd_Buzzer.c: 170:     RCONbits.IPEN = 0;
+"94
+[; ;but_leds.c: 94:     RCONbits.IPEN = 0;
 [e = . . _RCONbits 5 7 -> -> 0 `i `uc ]
-"172
-[; ;Gpio_Lcd_Buzzer.c: 172:     INTCONbits.GIE = 1;
+"96
+[; ;but_leds.c: 96:     INTCONbits.GIE = 1;
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-"173
-[; ;Gpio_Lcd_Buzzer.c: 173:     INTCONbits.PEIE = 1;
+"97
+[; ;but_leds.c: 97:     INTCONbits.PEIE = 1;
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-"174
-[; ;Gpio_Lcd_Buzzer.c: 174: }
+"98
+[; ;but_leds.c: 98: }
 [e :UE 658 ]
 }
-"177
-[; ;Gpio_Lcd_Buzzer.c: 177: void TMR0_Temporizador_Init(void) {
-[v _TMR0_Temporizador_Init `(v ~T0 @X0 1 ef ]
-{
-[e :U _TMR0_Temporizador_Init ]
-[f ]
-"178
-[; ;Gpio_Lcd_Buzzer.c: 178:     T0CONbits.T08BIT = 0;
-[e = . . _T0CONbits 0 4 -> -> 0 `i `uc ]
-"179
-[; ;Gpio_Lcd_Buzzer.c: 179:     T0CONbits.T0CS = 0;
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-"180
-[; ;Gpio_Lcd_Buzzer.c: 180:     T0CONbits.PSA = 0;
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-"181
-[; ;Gpio_Lcd_Buzzer.c: 181:     T0CONbits.T0PS = 0b101;
-[e = . . _T0CONbits 0 0 -> -> 5 `i `uc ]
-"184
-[; ;Gpio_Lcd_Buzzer.c: 184:     TMR0 = 3036;
-[e = _TMR0 -> -> 3036 `i `us ]
-"187
-[; ;Gpio_Lcd_Buzzer.c: 187:     INTCONbits.TMR0IE = 1;
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-"188
-[; ;Gpio_Lcd_Buzzer.c: 188:     INTCONbits.TMR0IF = 0;
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
-"191
-[; ;Gpio_Lcd_Buzzer.c: 191:     T0CONbits.TMR0ON = 0;
-[e = . . _T0CONbits 0 5 -> -> 0 `i `uc ]
-"192
-[; ;Gpio_Lcd_Buzzer.c: 192: }
-[e :UE 659 ]
-}
-"196
-[; ;Gpio_Lcd_Buzzer.c: 196: void INTERRUPT_INTx_Config(void) {
+"101
+[; ;but_leds.c: 101: void INTERRUPT_INTx_Config(void) {
 [v _INTERRUPT_INTx_Config `(v ~T0 @X0 1 ef ]
 {
 [e :U _INTERRUPT_INTx_Config ]
 [f ]
-"198
-[; ;Gpio_Lcd_Buzzer.c: 198:     INTCONbits.INT0IE = 1;
+"103
+[; ;but_leds.c: 103:     INTCONbits.INT0IE = 1;
 [e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-"199
-[; ;Gpio_Lcd_Buzzer.c: 199:     INTCONbits.INT0IF = 0;
+"104
+[; ;but_leds.c: 104:     INTCONbits.INT0IF = 0;
 [e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-"200
-[; ;Gpio_Lcd_Buzzer.c: 200:     INTCON2bits.INTEDG0 = 0;
+"105
+[; ;but_leds.c: 105:     INTCON2bits.INTEDG0 = 0;
 [e = . . _INTCON2bits 1 6 -> -> 0 `i `uc ]
-"203
-[; ;Gpio_Lcd_Buzzer.c: 203:     INTCON3bits.INT1IE = 1;
+"108
+[; ;but_leds.c: 108:     INTCON3bits.INT1IE = 1;
 [e = . . _INTCON3bits 0 3 -> -> 1 `i `uc ]
-"204
-[; ;Gpio_Lcd_Buzzer.c: 204:     INTCON3bits.INT1F = 0;
+"109
+[; ;but_leds.c: 109:     INTCON3bits.INT1F = 0;
 [e = . . _INTCON3bits 1 0 -> -> 0 `i `uc ]
-"205
-[; ;Gpio_Lcd_Buzzer.c: 205:     INTCON2bits.INTEDG1 = 0;
+"110
+[; ;but_leds.c: 110:     INTCON2bits.INTEDG1 = 0;
 [e = . . _INTCON2bits 1 5 -> -> 0 `i `uc ]
-"208
-[; ;Gpio_Lcd_Buzzer.c: 208:     INTCON3bits.INT2IE = 1;
+"113
+[; ;but_leds.c: 113:     INTCON3bits.INT2IE = 1;
 [e = . . _INTCON3bits 0 4 -> -> 1 `i `uc ]
-"209
-[; ;Gpio_Lcd_Buzzer.c: 209:     INTCON3bits.INT2IF = 0;
+"114
+[; ;but_leds.c: 114:     INTCON3bits.INT2IF = 0;
 [e = . . _INTCON3bits 0 1 -> -> 0 `i `uc ]
-"210
-[; ;Gpio_Lcd_Buzzer.c: 210:     INTCON2bits.INTEDG2 = 0;
+"115
+[; ;but_leds.c: 115:     INTCON2bits.INTEDG2 = 0;
 [e = . . _INTCON2bits 1 4 -> -> 0 `i `uc ]
-"211
-[; ;Gpio_Lcd_Buzzer.c: 211: }
-[e :UE 660 ]
+"116
+[; ;but_leds.c: 116: }
+[e :UE 659 ]
 }
-"216
-[; ;Gpio_Lcd_Buzzer.c: 216: void Print_Hour(void) {
-[v _Print_Hour `(v ~T0 @X0 1 ef ]
-{
-[e :U _Print_Hour ]
-[f ]
-"217
-[; ;Gpio_Lcd_Buzzer.c: 217:     Lcd_Set_Cursor(1, 1);
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"219
-[; ;Gpio_Lcd_Buzzer.c: 219:     sprintf(strReloj, "Timer:     %02u:%02u", minutes, seconds);
-[e ( _sprintf (1 , , (. , &U _strReloj :s 2C -> _minutes `i -> _seconds `i ]
-"221
-[; ;Gpio_Lcd_Buzzer.c: 221:     Lcd_Write_String(strReloj);
-[e ( _Lcd_Write_String (1 -> &U _strReloj `*uc ]
-"222
-[; ;Gpio_Lcd_Buzzer.c: 222: }
-[e :UE 661 ]
-}
-[p f _sprintf 8422404 ]
-[a 1C 84 105 109 101 114 58 32 32 37 48 50 117 58 37 48 50 117 58 37 48 50 117 0 ]
-[a 2C 84 105 109 101 114 58 32 32 32 32 32 37 48 50 117 58 37 48 50 117 0 ]

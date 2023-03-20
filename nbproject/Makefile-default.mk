@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Gpio_Lcd_Buzzer.c lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c
+SOURCEFILES_QUOTED_IF_SPACED=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c but_leds.c Lcd_Rele_temp.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 ${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d ${OBJECTDIR}/lib_pic/adc_10bits.p1.d ${OBJECTDIR}/lib_pic/configDevice.p1.d ${OBJECTDIR}/lib_pic/i2c_Master.p1.d ${OBJECTDIR}/lib_pic/keypad_4x4.p1.d ${OBJECTDIR}/lib_pic/lcd_2x16.p1.d ${OBJECTDIR}/lib_pic/spi_Master.p1.d ${OBJECTDIR}/lib_pic/usart.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/but_leds.p1 ${OBJECTDIR}/Lcd_Rele_temp.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1.d ${OBJECTDIR}/lib_pic/configDevice.p1.d ${OBJECTDIR}/lib_pic/i2c_Master.p1.d ${OBJECTDIR}/lib_pic/keypad_4x4.p1.d ${OBJECTDIR}/lib_pic/lcd_2x16.p1.d ${OBJECTDIR}/lib_pic/spi_Master.p1.d ${OBJECTDIR}/lib_pic/usart.p1.d ${OBJECTDIR}/but_leds.p1.d ${OBJECTDIR}/Lcd_Rele_temp.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 ${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1
+OBJECTFILES=${OBJECTDIR}/lib_pic/adc_10bits.p1 ${OBJECTDIR}/lib_pic/configDevice.p1 ${OBJECTDIR}/lib_pic/i2c_Master.p1 ${OBJECTDIR}/lib_pic/keypad_4x4.p1 ${OBJECTDIR}/lib_pic/lcd_2x16.p1 ${OBJECTDIR}/lib_pic/spi_Master.p1 ${OBJECTDIR}/lib_pic/usart.p1 ${OBJECTDIR}/but_leds.p1 ${OBJECTDIR}/Lcd_Rele_temp.p1
 
 # Source Files
-SOURCEFILES=Gpio_Lcd_Buzzer.c lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c
+SOURCEFILES=lib_pic/adc_10bits.c lib_pic/configDevice.c lib_pic/i2c_Master.c lib_pic/keypad_4x4.c lib_pic/lcd_2x16.c lib_pic/spi_Master.c lib_pic/usart.c but_leds.c Lcd_Rele_temp.c
 
 
 
@@ -88,14 +88,6 @@ MP_PROCESSOR_OPTION=18F45K50
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/Gpio_Lcd_Buzzer.p1: Gpio_Lcd_Buzzer.c  nbproject/Makefile-${CND_CONF}.mk 
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d 
-	@${RM} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 Gpio_Lcd_Buzzer.c 
-	@-${MV} ${OBJECTDIR}/Gpio_Lcd_Buzzer.d ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/lib_pic/adc_10bits.p1: lib_pic/adc_10bits.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/lib_pic" 
 	@${RM} ${OBJECTDIR}/lib_pic/adc_10bits.p1.d 
@@ -152,15 +144,23 @@ ${OBJECTDIR}/lib_pic/usart.p1: lib_pic/usart.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/lib_pic/usart.d ${OBJECTDIR}/lib_pic/usart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/lib_pic/usart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-else
-${OBJECTDIR}/Gpio_Lcd_Buzzer.p1: Gpio_Lcd_Buzzer.c  nbproject/Makefile-${CND_CONF}.mk 
+${OBJECTDIR}/but_leds.p1: but_leds.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d 
-	@${RM} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1 Gpio_Lcd_Buzzer.c 
-	@-${MV} ${OBJECTDIR}/Gpio_Lcd_Buzzer.d ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/Gpio_Lcd_Buzzer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	@${RM} ${OBJECTDIR}/but_leds.p1.d 
+	@${RM} ${OBJECTDIR}/but_leds.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/but_leds.p1 but_leds.c 
+	@-${MV} ${OBJECTDIR}/but_leds.d ${OBJECTDIR}/but_leds.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/but_leds.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/Lcd_Rele_temp.p1: Lcd_Rele_temp.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Lcd_Rele_temp.p1.d 
+	@${RM} ${OBJECTDIR}/Lcd_Rele_temp.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=pickit3   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Lcd_Rele_temp.p1 Lcd_Rele_temp.c 
+	@-${MV} ${OBJECTDIR}/Lcd_Rele_temp.d ${OBJECTDIR}/Lcd_Rele_temp.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Lcd_Rele_temp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+else
 ${OBJECTDIR}/lib_pic/adc_10bits.p1: lib_pic/adc_10bits.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}/lib_pic" 
 	@${RM} ${OBJECTDIR}/lib_pic/adc_10bits.p1.d 
@@ -216,6 +216,22 @@ ${OBJECTDIR}/lib_pic/usart.p1: lib_pic/usart.c  nbproject/Makefile-${CND_CONF}.m
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/lib_pic/usart.p1 lib_pic/usart.c 
 	@-${MV} ${OBJECTDIR}/lib_pic/usart.d ${OBJECTDIR}/lib_pic/usart.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/lib_pic/usart.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/but_leds.p1: but_leds.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/but_leds.p1.d 
+	@${RM} ${OBJECTDIR}/but_leds.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/but_leds.p1 but_leds.c 
+	@-${MV} ${OBJECTDIR}/but_leds.d ${OBJECTDIR}/but_leds.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/but_leds.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/Lcd_Rele_temp.p1: Lcd_Rele_temp.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Lcd_Rele_temp.p1.d 
+	@${RM} ${OBJECTDIR}/Lcd_Rele_temp.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/Lcd_Rele_temp.p1 Lcd_Rele_temp.c 
+	@-${MV} ${OBJECTDIR}/Lcd_Rele_temp.d ${OBJECTDIR}/Lcd_Rele_temp.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/Lcd_Rele_temp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

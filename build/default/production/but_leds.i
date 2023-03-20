@@ -1,4 +1,4 @@
-# 1 "Gpio_Lcd_Buzzer.c"
+# 1 "but_leds.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,9 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Users/jorda/.mchp_packs/Microchip/PIC18F-K_DFP/1.8.249/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Gpio_Lcd_Buzzer.c" 2
-
-
+# 1 "but_leds.c" 2
 # 1 "./lib_pic/configDevice.h" 1
 
 
@@ -8390,59 +8388,47 @@ void *memccpy (void *restrict, const void *restrict, int, size_t);
 
 
 void OSCILADOR_Init(void);
-# 3 "Gpio_Lcd_Buzzer.c" 2
-
-# 1 "./lib_pic/lcd_2x16.h" 1
-# 31 "./lib_pic/lcd_2x16.h"
-void Lcd_Port(unsigned char a);
-void Lcd_Cmd(unsigned char a);
-void Lcd_Clear( void );
-void Lcd_Set_Cursor(unsigned char a, unsigned char b);
-void Lcd_Init( void );
-void Lcd_Write_Char(unsigned char a);
-void Lcd_Write_String(unsigned char *a);
-void Lcd_Shift_Right( void );
-void Lcd_Shift_Left( void );
-# 4 "Gpio_Lcd_Buzzer.c" 2
+# 1 "but_leds.c" 2
 
 
 
 void PORT_Init(void);
-void Hardware_Init(void);
-void TMR0_Temporizador_Init(void);
 void INTERRUPT_Global_Config(void);
 void INTERRUPT_INTx_Config(void);
-void Print_Hour(void);
 
 
-volatile int8_t hours = 0, minutes = 0, seconds = 0;
-char strReloj[20];
-volatile _Bool is_pause = 1;
+volatile _Bool is_bt0_pushed = 0, is_bt1_pushed = 0, is_bt2_pushed = 0;
 
-uint8_t col;
+int main ( void ) {
 
-int main( void ) {
-
-    Hardware_Init();
-
-    Lcd_Clear();
-    Lcd_Set_Cursor(1, 1);
-    sprintf(strReloj, "Timer:  %02u:%02u:%02u", hours, minutes, seconds);
-
-    Lcd_Write_String(strReloj);
-
+    OSCILADOR_Init();
+    PORT_Init();
+    INTERRUPT_Global_Config();
+    INTERRUPT_INTx_Config();
 
     while ( 1 ) {
-# 43 "Gpio_Lcd_Buzzer.c"
-        Print_Hour();
 
-
-        if ( seconds == 0 && minutes == 0 && is_pause == 0 ) {
-            LATEbits.LATE2 = 1;
-            _delay((unsigned long)((250)*(8000000UL/4000.0)));
-            LATEbits.LATE2 = 0;
-            _delay((unsigned long)((250)*(8000000UL/4000.0)));
+        if ( is_bt1_pushed ) {
+            for (uint8_t i = 0; i <= 8; i++) {
+            LATD = 0b10000000 >> i;
+            _delay((unsigned long)((100)*(8000000UL/4000.0)));
+            }
         }
+        else if ( is_bt2_pushed ) {
+            for (uint8_t i = 0; i <= 8; i++) {
+                LATD = 1 << i;
+                _delay((unsigned long)((100)*(8000000UL/4000.0)));
+            }
+        }
+        else {
+
+
+
+
+            LATD = 0x00;
+        }
+
+
     }
 }
 
@@ -8451,27 +8437,12 @@ int main( void ) {
 void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
 
 
-    if ( INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1 ) {
-
-        TMR0 = 3036;
-        INTCONbits.TMR0IF = 0;
-# 80 "Gpio_Lcd_Buzzer.c"
-        seconds--;
-        if ( seconds < 0 ) {
-            seconds = 59;
-            minutes--;
-            if ( minutes < 0 ) {
-                minutes = 0;
-                seconds = 0;
-            }
-        }
-    }
-
 
     if ( INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1 ) {
 
-        minutes++;
-
+        is_bt0_pushed = 1;
+        is_bt1_pushed = 0;
+        is_bt2_pushed = 0;
 
         INTCONbits.INT0IF = 0;
     }
@@ -8479,8 +8450,9 @@ void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
 
     if ( INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1 ) {
 
-        seconds++;
-
+        is_bt0_pushed = 0;
+        is_bt1_pushed = 1;
+        is_bt2_pushed = 0;
 
         INTCON3bits.INT1IF = 0;
     }
@@ -8488,25 +8460,9 @@ void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
 
     if ( INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1 ) {
 
-        if ( is_pause ) {
-
-            if ( seconds == 0 && minutes == 0 ) {
-                minutes = 0;
-                seconds = 0;
-            }
-            else if ( seconds == 0 ) {
-                seconds = 59;
-                minutes--;
-            }
-            else {
-                seconds--;
-            }
-
-        }
-        is_pause = !is_pause;
-
-        T0CONbits.TMR0ON = ~T0CONbits.TMR0ON;
-
+        is_bt0_pushed = 0;
+        is_bt1_pushed = 0;
+        is_bt2_pushed = 1;
 
         INTCON3bits.INT2IF = 0;
     }
@@ -8515,33 +8471,13 @@ void __attribute__((picinterrupt(("")))) RutinaServicioInterrupt (void) {
 
 
 
+
+
+
 void PORT_Init(void) {
 
     ANSELD = 0x00;
-
-
-    ANSELBbits.ANSB0 = 0;
-    TRISBbits.RB0 = 1;
-    ANSELBbits.ANSB1 = 0;
-    TRISBbits.RB1 = 1;
-    ANSELBbits.ANSB2 = 0;
-    TRISBbits.RB2 = 1;
-
-
-    ANSELEbits.ANSE2 = 0;
-    TRISEbits.RE2 = 0;
-
-
-}
-
-
-void Hardware_Init(void) {
-    OSCILADOR_Init();
-    PORT_Init();
-    Lcd_Init();
-    TMR0_Temporizador_Init();
-    INTERRUPT_Global_Config();
-    INTERRUPT_INTx_Config();
+    TRISD = 0x00;
 }
 
 
@@ -8551,25 +8487,6 @@ void INTERRUPT_Global_Config(void) {
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
 }
-
-
-void TMR0_Temporizador_Init(void) {
-    T0CONbits.T08BIT = 0;
-    T0CONbits.T0CS = 0;
-    T0CONbits.PSA = 0;
-    T0CONbits.T0PS = 0b101;
-
-
-    TMR0 = 3036;
-
-
-    INTCONbits.TMR0IE = 1;
-    INTCONbits.TMR0IF = 0;
-
-
-    T0CONbits.TMR0ON = 0;
-}
-
 
 
 void INTERRUPT_INTx_Config(void) {
@@ -8587,15 +8504,4 @@ void INTERRUPT_INTx_Config(void) {
     INTCON3bits.INT2IE = 1;
     INTCON3bits.INT2IF = 0;
     INTCON2bits.INTEDG2 = 0;
-}
-
-
-
-
-void Print_Hour(void) {
-    Lcd_Set_Cursor(1, 1);
-
-    sprintf(strReloj, "Timer:     %02u:%02u", minutes, seconds);
-
-    Lcd_Write_String(strReloj);
 }
